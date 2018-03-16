@@ -1,0 +1,63 @@
+body {
+  font-family: 'Roboto', sans-serif;
+}
+
+.container {
+  width: 940px;
+  margin: auto;
+}
+
+.header {
+  margin: 10px 0;
+}
+
+.header a{
+  color: #505050;
+}
+.header a:hover{
+  color: #7b7b7b;
+  text-decoration: none;
+}
+
+a {
+  color: #4c47dc;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #7a76e5;
+}
+
+h1, h2, h3, h4, h5 {
+  margin: 0;
+}
+
+.posts-page .post {
+  margin: 10px 0;
+}
+
+.loader {
+  text-align: center;
+}
+
+.post-author {
+  font-size: 12px;
+  margin-left: 5px;
+}
+
+.post-title {
+  display: inline-block;
+}
+
+.post-page .post {
+  margin-bottom: 10px;
+}
+
+.comment, .posts-page .post {
+  padding: 5px;
+  margin: 5px 0;
+}
+
+.comment:hover, .posts-page .post:hover {
+  box-shadow: rgba(144, 144, 144, 0.5) 2px 2px 10px 0;
+}
