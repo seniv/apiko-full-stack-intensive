@@ -30,8 +30,10 @@ async function showPosts () {
 }
 
 async function showPost (postId) {
-  const post = await fetchJson(`posts/${postId}`)
-  const comments = await fetchJson(`posts/${postId}/comments`)
+  const [post, comments] = await Promise.all([
+    fetchJson(`posts/${postId}`),
+    fetchJson(`posts/${postId}/comments`)
+  ])
   const author = await fetchJson(`users/${post.userId}`)
   app.removeChild(loader)
 
@@ -59,8 +61,10 @@ async function showPost (postId) {
 }
 
 async function showUser (userId) {
-  const user = await fetchJson(`users/${userId}`)
-  const posts = await fetchJson(`users/${userId}/posts`)
+  const [user, posts] = await Promise.all([
+    fetchJson(`users/${userId}`),
+    fetchJson(`users/${userId}/posts`)
+  ])
   app.removeChild(loader)
 
   app.appendChild(
