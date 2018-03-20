@@ -1,6 +1,7 @@
 const app = document.getElementById('app')
 const loader = document.getElementById('loader')
 const params = new URLSearchParams(window.location.search)
+const basicURL = 'https://jsonplaceholder.typicode.com/'
 
 if (params.has('postId')) {
   showPost(params.get('postId'))
@@ -11,7 +12,7 @@ if (params.has('postId')) {
 }
 
 async function showPosts () {
-  const posts = await fetch('https://jsonplaceholder.typicode.com/posts').then(data => data.json())
+  const posts = await fetchJson(`posts`)
   app.removeChild(loader)
   
   app.appendChild(
@@ -29,9 +30,9 @@ async function showPosts () {
 }
 
 async function showPost (postId) {
-  const post = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}`).then(data => data.json())
-  const comments = await fetch(`https://jsonplaceholder.typicode.com/posts/${postId}/comments`).then(data => data.json())
-  const author = await fetch(`https://jsonplaceholder.typicode.com/users/${post.userId}`).then(data => data.json())
+  const post = await fetchJson(`posts/${postId}`)
+  const comments = await fetchJson(`posts/${postId}/comments`)
+  const author = await fetchJson(`users/${post.userId}`)
   app.removeChild(loader)
 
   app.appendChild(
@@ -58,8 +59,8 @@ async function showPost (postId) {
 }
 
 async function showUser (userId) {
-  const user = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}`).then(data => data.json())
-  const posts = await fetch(`https://jsonplaceholder.typicode.com/users/${userId}/posts`).then(data => data.json())
+  const user = await fetchJson(`users/${userId}`)
+  const posts = await fetchJson(`users/${userId}/posts`)
   app.removeChild(loader)
 
   app.appendChild(
@@ -92,4 +93,8 @@ function createElement(tag, props = {}, ...children) {
   }
 
   return element
+}
+
+function fetchJson (url, options) {
+  return fetch(basicURL + url, options).then(data => data.json())
 }
