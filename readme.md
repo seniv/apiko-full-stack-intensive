@@ -1,1 +1,1 @@
-#Домашні завдання Apiko Full-Stack Intensive
+# Домашні завдання Apiko Full-Stack Intensive
