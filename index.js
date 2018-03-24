@@ -3,7 +3,7 @@ const React = {
     const element = document.createElement(tag)
   
     if (props) Object.keys(props).forEach(key => {
-      if (key === "style") Object.assign(element.style, props.style)
+      if (key === "style" && typeof props.style === 'object') Object.assign(element.style, props.style)
       else element[key] = props[key]
     })
 
@@ -23,6 +23,7 @@ const React = {
     return element
   },
   render (application, root) {
+    root.innerHTML = ''
     root.appendChild(application)
   }
 }
@@ -33,6 +34,7 @@ const app =
     React.createElement('br'),
     'This is just a text node',
     React.createElement('div', { textContent: 'Text content' }),
+    React.createElement('div', { style: 'color: green; background-color: white;' }, 'string style'),
   ]);
 
 React.render(
