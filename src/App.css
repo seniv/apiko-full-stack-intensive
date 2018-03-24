@@ -1,0 +1,46 @@
+.container {
+  width: 940px;
+  margin: auto;
+}
+
+a {
+  color: #2642ce;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #5b70d8;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+li {
+  padding: 10px;
+  margin: 10px 0;
+  box-shadow: silver 0px 1px 1px 1px;
+  cursor: pointer;
+}
+
+button {
+  width: 100%;
+  padding: 15px;
+  box-shadow: silver 0px 1px 1px 1px;
+  border: none;
+  background-color: #e9e9e9;
+  transition: .3s;
+  text-transform: uppercase;
+  outline: none;
+}
+
+button:hover {
+  cursor: pointer;
+  box-shadow: silver 0px 1px 5px 2px;
+}
+
+.title {
+  font-weight: bold;
+}
