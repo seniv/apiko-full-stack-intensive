@@ -1,34 +1,53 @@
 import React, { Component } from 'react';
 import './App.css';
-import data from './data.json';
+import postsData from './data.json';
 
 import PostList from './components/PostList';
 import MoreButton from './components/MoreButton';
 import Header from './components/Header';
+import SearchInput from './components/SearchInput';
+import ItemsNotFound from './components/ItemsNotFound';
 
 class App extends Component {
   constructor (props) {
     super(props);
     this.state = { posts: [] };
+    this.data = [];
 
-    this.loadMore = this.loadMore.bind(this);
+    this.showMore = this.showMore.bind(this);
+    this.fakeLoadData = this.fakeLoadData.bind(this);
+    this.searchHandler = this.searchHandler.bind(this);
   }
-  loadMore () {
+  showMore () {
     const { posts } = this.state;
-    const newPosts = data.slice(posts.length, posts.length + 10)
+    const newPosts = this.data.slice(posts.length, posts.length + 10);
     this.setState({
       posts: posts.concat(newPosts)
     });
   }
+  fakeLoadData (search = '') {
+    const regExp = RegExp(search, 'i');
+    this.data = postsData.filter(post => regExp.test(post.title));
+    this.setState({
+      posts: this.data.slice(0, 10)
+    });
+  }
+  searchHandler ({ target: { value } }) {
+    this.fakeLoadData(value);
+  }
   componentDidMount () {
-    this.loadMore();
+    this.fakeLoadData();
   }
   render() {
     return (
       <div className="container">
         <Header />
-        <PostList posts={this.state.posts} />
-        <MoreButton onClick={this.loadMore} />
+        <SearchInput handleChange={this.searchHandler} />
+        { this.state.posts.length > 0
+          ? <PostList posts={this.state.posts} />
+          : <ItemsNotFound />
+        }
+        { this.data.length > this.state.posts.length && <MoreButton onClick={this.showMore} /> }
       </div>
     );
   }

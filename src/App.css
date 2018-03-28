@@ -44,3 +44,18 @@ button:hover {
 .title {
   font-weight: bold;
 }
+
+.search-input {
+  width: 100%;
+  font-size: 22px;
+  padding: 5px;
+  box-sizing: border-box;
+  margin-bottom: 15px;
+}
+
+.no-items {
+  font-size: 22px;
+  padding: 15px;
+  background-color: #e94b4b;
+  color: #fff;
+}

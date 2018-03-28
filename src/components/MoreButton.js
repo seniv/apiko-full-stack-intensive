@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const MoreButton = ({ onClick }) => (
-  <button onClick={onClick}>Load more</button>
+  <button onClick={onClick}>Show more</button>
 );
 
 MoreButton.propTypes = {
