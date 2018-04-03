@@ -59,3 +59,10 @@ button:hover {
   background-color: #e94b4b;
   color: #fff;
 }
+
+.data-loading {
+  font-size: 22px;
+  padding: 15px;
+  background-color: #e4ad46;
+  color: #fff;
+}

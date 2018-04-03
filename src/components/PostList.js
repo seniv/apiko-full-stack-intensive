@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 
 import ItemsNotFound from './ItemsNotFound';
 import MoreButton from './MoreButton';
+import Loader from './Loader';
 
 const BASE_URL = 'https://jsonplaceholder.typicode.com/';
 
@@ -48,7 +49,7 @@ class PostList extends Component {
     const { searchInput } = this.props;
     
     if (isLoading) {
-      return <div>Loading...</div>;
+      return <Loader />;
     }
 
     const regExp = RegExp(searchInput, 'i');
