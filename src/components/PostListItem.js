@@ -11,21 +11,25 @@ class PostListItem extends Component {
   toggleDisplay () {
     this.setState({ displayBody: !this.state.displayBody });
   }
+  shouldComponentUpdate (nextProps, nextState) {
+    return this.props.title !== nextProps.title ||
+           this.props.body !== nextProps.body ||
+           this.state.displayBody !== nextState.displayBody;
+  }
   render() {
-    const { post } = this.props;
+    const { title, body } = this.props;
     return (
       <li onClick={this.toggleDisplay}>
-        <span className="title">{post.title}</span>
-        {this.state.displayBody &&
-          <div>{post.body}</div>
-        }
+        <span className="title">{title}</span>
+        {this.state.displayBody && <div>{body}</div> }
       </li>
     );
   }
 }
 
 PostListItem.propTypes = {
-  post: PropTypes.object.isRequired
+  title: PropTypes.string.isRequired,
+  body: PropTypes.string.isRequired,
 };
 
 export default PostListItem;
