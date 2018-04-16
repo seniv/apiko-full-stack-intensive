@@ -5,7 +5,7 @@ import { withInputs } from 'custom-hoc';
 import { withRouter, Redirect } from 'react-router';
 import * as R from 'ramda';
 import { db } from '../../utils';
-import { loaderActions } from '../../modules/loader';
+import { loaderActions, questionTypes } from '../../modules/loader';
 
 import Component from './Component';
 import AppLoader from '../Loaders/AppLoader';
@@ -24,7 +24,7 @@ const prepareTags = R.compose(
 
 const mapStateToProps = (state) => ({
   user: state.user,
-  // TODO: HOMEWORK 9: pick loader from here and display in UI when the post is creating
+  isCreating: state.loader[questionTypes.CREATE_QUESTION]
 });
 
 const enhance = compose(
@@ -45,7 +45,7 @@ const enhance = compose(
   }),
 
   branch(
-    ({ isFetching }) => isFetching,
+    ({ isFetching, isCreating }) => isFetching || isCreating,
     renderComponent(AppLoader)
   ),
 
@@ -79,7 +79,7 @@ const enhance = compose(
         db.questions.update(match.params.questionId, document);
         history.push('/');
       } else {
-        // TODO: HOMEWORK 9: make it work, dispatch loaderActions.createQuestion with db, document and history as arguments
+        dispatch(loaderActions.createQuestion(db, document, history))
       }
     },
     onRemove: ({ match, history }) => () => {
