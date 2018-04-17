@@ -17,8 +17,8 @@ const divideVotes = votes => {
   const negative = votes.length - positive
   return { positive, negative }
 }
-const filterVotesById = R.curry((votes, id) => R.filter(R.compose(R.equals(id), R.prop('answerId')), votes))
-const divideByAnswerId = votes => R.compose(divideVotes, R.compose(filterVotesById(votes), R.prop('_id')))
+const filterVotesById = R.curry((votes, id) => R.filter(R.propEq('answerId', id), votes))
+const divideByAnswerId = votes => R.compose(divideVotes, filterVotesById(votes), R.prop('_id'))
 
 const sortAnswers = ({answers, votes, answerSort}) => {
   const sortCondition = R.cond([
