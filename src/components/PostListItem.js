@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import PropTypes from 'prop-types';
 
-class PostListItem extends Component {
+class PostListItem extends PureComponent {
   constructor(props) {
     super(props);
     this.state = { displayBody: false };
@@ -10,11 +10,6 @@ class PostListItem extends Component {
   }
   toggleDisplay () {
     this.setState({ displayBody: !this.state.displayBody });
-  }
-  shouldComponentUpdate (nextProps, nextState) {
-    return this.props.title !== nextProps.title ||
-           this.props.body !== nextProps.body ||
-           this.state.displayBody !== nextState.displayBody;
   }
   render() {
     const { title, body } = this.props;
