@@ -19,14 +19,16 @@ const divideVotes = votes => {
 }
 const filterVotesById = R.curry((votes, id) => R.filter(R.propEq('answerId', id), votes))
 const divideByAnswerId = votes => R.compose(divideVotes, filterVotesById(votes), R.prop('_id'))
+const assignVotes = votes => answer => Object.assign({}, answer, divideByAnswerId(votes)(answer))
+const sortCondition = R.cond([
+  [R.equals('best'), () => R.prop('positive')],
+  [R.equals('worst'), () => R.prop('negative')],
+  [R.T, () => R.prop('createdAt')]
+])
 
-const sortAnswers = ({answers, votes, answerSort}) => {
-  const sortCondition = R.cond([
-    [R.equals('best'), () => R.compose(R.prop('positive'), divideByAnswerId(votes))],
-    [R.equals('worst'), () => R.compose(R.prop('negative'), divideByAnswerId(votes))],
-    [R.T, () => R.prop('createdAt')]
-  ])
-  return R.sort(R.descend(sortCondition(answerSort)), answers)
+const sortAnswersWithVotes = ({answers, votes, answerSort}) => {
+  const answersWithVotes = R.map(assignVotes(votes), answers)
+  return R.sort(R.descend(sortCondition(answerSort)), answersWithVotes)
 }
 
 const enhance = compose(
@@ -75,7 +77,7 @@ const enhance = compose(
     }
   }),
 
-  withProps(props => ({ answers: sortAnswers(props)})),
+  withProps(props => ({ answers: sortAnswersWithVotes(props)})),
 );
 
 
