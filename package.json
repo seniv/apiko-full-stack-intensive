@@ -1,0 +1,26 @@
+{
+  "name": "apiko-full-stack-intensive",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "dependencies": {
+    "mongoose": "^5.0.16"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "db": "mongod",
+    "start": "node ./src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/seniv/apiko-full-stack-intensive.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/seniv/apiko-full-stack-intensive/issues"
+  },
+  "homepage": "https://github.com/seniv/apiko-full-stack-intensive#readme"
+}
