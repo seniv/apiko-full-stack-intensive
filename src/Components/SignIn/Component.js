@@ -17,17 +17,18 @@ const ForgotLink = styled.a`
 `.withComponent(Link);
 
 
-const SignIn = ({ username, password, submitReady, onChange, onSubmit }) => (
+const SignIn = ({ email, password, submitReady, onChange, onSubmit }) => (
   <FormWrapper>
     <Form onSubmit={onSubmit}>
       <StyledHeader>Sign In</StyledHeader>
 
       <TextInput
         autoFocus
-        value={username}
-        name="username"
-        placeholder="Username"
-        onChange={onChange('username')}
+        type="email"
+        value={email}
+        name="email"
+        placeholder="Email"
+        onChange={onChange('email')}
       />
 
       <TextInput

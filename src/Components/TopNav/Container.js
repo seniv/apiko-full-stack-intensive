@@ -2,6 +2,7 @@ import T from 'prop-types';
 import { connect } from 'react-redux';
 import { compose, getContext, withProps } from 'recompose';
 import TopNavComponent from './Component';
+import { signOut } from '../../service/auth';
 
 
 const MENU_ITEMS = {
@@ -15,10 +16,16 @@ const MENU_ITEMS = {
   ],
 };
 
+const onSignOut = ({ onUserChange }) => {
+  signOut()
+  .then(() => {
+    onUserChange()
+  });
+}
 
 const getItemsForUser = ({ onUserChange, user }) => [
   { label: `Hello, ${user.username}`, to: '' },
-  { label: 'Sing Out', to: '', onClick: () => onUserChange() },
+  { label: 'Sing Out', to: '', onClick: () => onSignOut({onUserChange}) },
 ];
 
 
