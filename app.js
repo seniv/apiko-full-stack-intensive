@@ -24,9 +24,8 @@ mongoManager.connect();
 
 app.use('/api/v1/', api(config));
 
-// catch 404 and forward to error handler
-app.use((req, res, next) => {
-  next(createError(404));
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, './public/build/', 'index.html'));
 });
 
 // error handler
