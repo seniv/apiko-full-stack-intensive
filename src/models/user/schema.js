@@ -7,12 +7,16 @@ const profile = {
 };
 
 const schema = new Schema ({
-  email: {
+  username: {
     type: String,
     required: true,
   },
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
   profile,
-  services: Object
 });
 
 module.exports = schema;

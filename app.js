@@ -6,6 +6,7 @@ const cookieParser = require('cookie-parser');
 const config = require('./config');
 const api = require('./src/api');
 const { MongoManager } = require('./src/mongo');
+const passport = require('./src/passport');
 
 mongoManager = new MongoManager(config);
 const app = express();
@@ -18,6 +19,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(passport.initialize());
 mongoManager.connect();
 
 app.use('/api/v1/', api(config));
