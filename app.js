@@ -18,13 +18,14 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public/build')));
 app.use(passport.initialize());
 mongoManager.connect();
 
 app.use('/api/v1/', api(config));
 
 app.get('*', (req, res) => {
+  console.log(path.resolve(__dirname, './public/build/', 'index.html'))
   res.sendFile(path.resolve(__dirname, './public/build/', 'index.html'));
 });
 
