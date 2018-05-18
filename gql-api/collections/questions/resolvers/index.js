@@ -6,8 +6,10 @@ const MAX_SHORT_DES_LENGTH = 50;
 module.exports = {
   // Root level query resolvers for questions (to fetch data)
   Query: {
-    questions: (_, { limit, skip }) =>
-      Question.find({}, {}, { limit, skip, sort: { createdAt: -1 } }),
+    questions: (_, { limit, skip, searchTerm }) =>
+      Question.find({
+        title: { $regex: new RegExp(searchTerm, 'i') },
+      }, {}, { limit, skip, sort: { createdAt: -1 } }),
     question: (_, { _id }) => Question.findById(_id),
   },
   // Resolvers for specific Question field

@@ -27,6 +27,7 @@ module.exports = gql`
     questions(
       limit: Int = 20
       skip: Int = 0
+      searchTerm: String = ""
     ): [Question!]!
   }
 `;
