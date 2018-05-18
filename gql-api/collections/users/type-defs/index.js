@@ -10,6 +10,7 @@ module.exports = gql`
       limit: Int = 20
       skip: Int = 0
     ): [Question!]!
+    votes: [Vote]
   }
 
   extend type Query {

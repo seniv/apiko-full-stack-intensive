@@ -1,5 +1,6 @@
-const { User } = require('../modal/index');
-const { Question } = require('../../questions/modal/index');
+const { User } = require('../model');
+const { Question } = require('../../questions/model');
+const { Vote } = require('../../votes/model');
 
 module.exports = {
   Query: {
@@ -15,5 +16,6 @@ module.exports = {
         {},
         { limit, skip, sort: { createdAt: -1 } },
       ),
+    votes: ({ _id }) => Vote.find({ createdBy: _id }),
   },
 };

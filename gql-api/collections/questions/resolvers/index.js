@@ -1,5 +1,6 @@
-const { Question } = require('../modal/index');
-const { User } = require('../../users/modal/index');
+const { Question } = require('../model');
+const { User } = require('../../users/model');
+const { Answer } = require('../../answers/model');
 
 const MAX_SHORT_DES_LENGTH = 50;
 
@@ -15,12 +16,14 @@ module.exports = {
   // Resolvers for specific Question field
   Question: {
     // Just Modify existed field
-    shortDescription: ({ description = '' }) =>
+    shortDescription: ({ description = '' }) => (
       description.length < MAX_SHORT_DES_LENGTH
         ? description
-        : `${description.substr(0, MAX_SHORT_DES_LENGTH)} ...`,
+        : `${description.substr(0, MAX_SHORT_DES_LENGTH)} ...`
+    ),
     // Fetch question author by `createdBy` id field
     // Require to specify User type and resolver
     author: ({ createdBy }) => User.findById(createdBy),
+    answers: ({ _id }) => Answer.find({ questionId: _id }),
   },
 };
